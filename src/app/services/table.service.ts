@@ -1,25 +1,20 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http'; 
 import { Observable, of } from 'rxjs';
 
 import { Element } from '../element';
 import { ELEMENT_DATA } from '../mock-elements';
 
-
 @Injectable({
   providedIn: 'root'
 })
-export class JobsService {
+export class TableService {
 
-  constructor(private http: HttpClient) { }
-
-  dataUrl = 'assets/data.json';
+// TODO:
+// this version uses fake data from mock-elements (for simplicity)
+// extending the functionality, I'd use httpClient to get the data from real or mock API
+// or possibly, from the .csv file
 
   getElements(): Observable<Element[]> {
-  	return of(ELEMENT_DATA);
+	return of(ELEMENT_DATA);
   }
-
- //  getData() {
-	// return this.http.get(this.dataUrl);
- //  }
 }
