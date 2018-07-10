@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http'; 
+import { Observable, of } from 'rxjs';
+
+import { Element } from '../element';
+import { ELEMENT_DATA } from '../mock-elements';
 
 
 @Injectable({
@@ -11,7 +15,11 @@ export class JobsService {
 
   dataUrl = 'assets/data.json';
 
-  getData() {
-	return this.http.get(this.dataUrl);
+  getElements(): Observable<Element[]> {
+  	return of(ELEMENT_DATA);
   }
+
+ //  getData() {
+	// return this.http.get(this.dataUrl);
+ //  }
 }

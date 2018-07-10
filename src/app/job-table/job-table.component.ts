@@ -20,10 +20,12 @@
 //   }
 // }
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { JobsService } from '../services/jobs.service';
 import { Observable } from 'rxjs';
 import { MatSort, MatPaginator, MatTableDataSource } from '@angular/material';
-import { ELEMENT_DATA } from '../mock-elements'
+import { JobsService } from '../services/jobs.service';
+import { Element } from '../element';
+
+import { ELEMENT_DATA } from '../mock-elements';
 
 @Component({
   selector: 'job-table',
@@ -31,8 +33,23 @@ import { ELEMENT_DATA } from '../mock-elements'
   templateUrl: 'job-table.component.html',
 })
 export class JobTableComponent implements OnInit {
+  el: Element[];
   displayedColumns: string[] = ['position', 'name', 'date'];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
+  dataSource;
+
+  constructor(private jobsService: JobsService) {};
+  
+  getElements(): void {
+    this.jobsService.getElements()
+        .subscribe(elements => this.el = elements);
+  }
+
+  ngOnInit() {
+    this.getElements();
+    this.dataSource = new MatTableDataSource(this.el);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -40,9 +57,4 @@ export class JobTableComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-
-  ngOnInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
 }
