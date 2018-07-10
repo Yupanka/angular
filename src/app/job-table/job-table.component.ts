@@ -23,25 +23,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { JobsService } from '../services/jobs.service';
 import { Observable } from 'rxjs';
 import { MatSort, MatPaginator, MatTableDataSource } from '@angular/material';
-
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  date: Date;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', date: new Date('Jan 1, 2018')},
-  {position: 2, name: 'Helium', date: new Date()},
-  {position: 3, name: 'Lithium', date: new Date()},
-  {position: 4, name: 'Beryllium', date: new Date()},
-  {position: 5, name: 'Boron', date: new Date()},
-  {position: 6, name: 'Carbon', date: new Date()},
-  {position: 7, name: 'Nitrogen', date: new Date()},
-  {position: 8, name: 'Oxygen', date: new Date()},
-  {position: 9, name: 'Fluorine', date: new Date()},
-  {position: 10, name: 'Neon', date: new Date()},
-];
+import { ELEMENT_DATA } from '../mock-elements'
 
 @Component({
   selector: 'job-table',
